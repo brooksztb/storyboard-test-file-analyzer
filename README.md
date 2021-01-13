@@ -54,4 +54,4 @@ $ npm run serve
 
 This will start the Vue app, and when you navigate to http://localhost:8080 you should see the following results:
 
-![browser results](file:///Users/brooksztb/Desktop/fileAnalyzerUi.png)
+![browser results](./fileAnalyzerUi.png)
