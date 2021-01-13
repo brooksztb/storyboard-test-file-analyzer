@@ -1,100 +1,57 @@
-# Audio Inspection Challenge
+# Storyboard Coding Challenge - Audio File Analyzer UI
+
+## Background
+
+This project is my submission to Storyboard's audio inspection challenge. The project is intended to pull metadata from a static audio file, and display the results with specified data in the browser. The project is broken up into two different parts, `client` and `server`.
+
+The client part of the project is a Vue based app, styled with tailwindcss a utility based css framework, and pulls the file data from a fetch request.
+
+The server part of the project is an express server that hosts an endpoint to retrieve the file data, and utilizes a provided function to analyze the file.
 
 ## Preparation
 
 ### Step 1: Clone this repository.
 
 ```sh
-$ git clone https://github.com/Storyboard-fm/sb-fs-test1.git
+$ git clone https://github.com/brooksztb/storyboard-test-file-analyzer.git
 ```
 
-### Step 2: Install dependencies.
+An important note for this repository, you'll need two separate command terminals open, one for the `client` and one for the `server`.
 
-After unpacking the repository, `cd` into it and install the `npm`
+### Step 2: Install dependencies for the server.
+
+After unpacking the repository, in one of the terminals, `cd` into `server` and install the `npm`
 dependencies:
 
 ```sh
-$ cd sb-fs-test1
+$ cd server
 $ npm install
 ```
 
-## Background
+### Step 3: Install dependencies for the client.
 
-This project probes the file, `example.wav` for file metadata and logs a
-portion of the results obtained to the console. To do this, we are utilizing a
-Node module I've authored called `little-media-box`:
-
-* [Documentation](https://github.com/little-core-labs/little-media-box/blob/master/README.md)
-* [Examples](https://github.com/little-core-labs/little-media-box/tree/master/example)
-
-After performing the above preparation steps, running this in your terminal:
+After unpacking the repository, in the second terminal, `cd` into `client` and install the `npm`
+dependencies:
 
 ```sh
-$ node app.js
+$ cd client
+$ npm install
 ```
 
-Should yield the below results.
+After performing the above preparation steps, run this in your `server` terminal:
 
 ```sh
-Probe results for file at URI: file:///home/gwohl/code/storyboard/sb-fs-test1/example.wav
-
-
-File format...	 WAV / WAVE (Waveform Audio)
-File size...	 1920044 bytes
-Codec type...	 audio
-Channel count... 2
-Duration...	 10 seconds
+$ npm run start
 ```
 
-## Challenge Description
+This will start the express server on port 4000.
 
-**Let's turn this simple, dumb console app into a simple, dumb web app!**
+Once the server is running, run this in your `client` terminal
 
-Using whatever tools/libraries/frameworks you'd like (i.e., Express, React,
-etc.), please design a simple web user interface to display these metrics to the
-user. Feel free to include any additional information you think may be
-of interest, while ensuring your work meets the below requirements.
+```sh
+$ npm run serve
+```
 
-We anticipate that this challenge should take approximately one hour or so to
-complete.
+This will start the Vue app, and when you navigate to http://localhost:8080 you should see the following results:
 
-### Requirements
-
-**Requirement 1**
-
-At a minimum, your interface should display the following information about
-the `example.wav` file:
-
-* File type
-* File size
-* Codec type
-* Duration
-* Channel count
-
-**Requirement 2**
-
-Your `package.json` should be prepared with all of the `npm` dependencies and
-scripts necessary to successfully clone down your code and run it on
-`localhost`.
-
-**Requirement 3**
-
-Please provide a README, if necessary to document how to prepare the development
-environment and run the application.
-
-### Hints
-
-#### Hint 1
-
-The `little-media-box` module is fully documented to `jsdoc` specifications. It
-should be relatively easy and painless to generate documentation for the entire
-module and its class libraries, if desired.
-
-## Have Fun!
-
-Please feel encouraged to have fun with this challenge. Your work will not be
-judged on the merits of any design or UI/UX concerns. We are interested in
-seeing how you scaffold your project and will also be looking for clean,
-readable, idiomatic ES6 code in general.
-
-Feel free to ping me at andrew@storyboard.fm with any questions you may have.
+![browser results](file:///Users/brooksztb/Desktop/fileAnalyzerUi.png)

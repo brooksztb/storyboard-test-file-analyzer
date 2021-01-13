@@ -4,6 +4,9 @@
 		class="flex flex-col items-center max-w-1200px w-full m-auto p-10"
 	>
 		<h1 class="text-2xl">Audio File Analyzer</h1>
+		<div v-if="error" class="flex flex-col items-center text-red-500">
+			{{ error }}
+		</div>
 		<div v-if="fileInfo && fileInfo.source" class="flex flex-col items-center">
 			<span class="text-md">Results of file(s) analysis</span>
 			<analzyed-file :fileInfo="fileInfo" />
@@ -36,13 +39,14 @@ export default {
 		this.error = ''
 
 		//could be improved to pull several files from a server and list them out
-		axios.get(API_URL).then((response) => {
-			if (response.status == 200 && response.data) {
-				this.fileInfo = response.data
-			} else {
-				this.error = response.data
-			}
-		})
+		axios
+			.get(API_URL)
+			.then((response) => {
+				if (response.status == 200 && response.data) {
+					this.fileInfo = response.data
+				}
+			})
+			.catch((e) => (this.error = e))
 	},
 }
 </script>
