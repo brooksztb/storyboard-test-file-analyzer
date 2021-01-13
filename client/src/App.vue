@@ -1,31 +1,43 @@
 <template>
 	<div id="app">
-		<img alt="Vue logo" src="./assets/logo.png" />
-		<HelloWorld msg="Welcome to Your Vue.js App" />
-		<div>{{ fileinfo }}</div>
+		<div v-if="fileInfo && fileInfo.source">
+			<span>Results for file at URI: {{ fileInfo.source.uri }}</span>
+			<analzyed-file :fileInfo="fileInfo" />
+		</div>
 	</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import AnalyzedFile from './components/AnalzyedFile'
+import axios from 'axios'
+import AnalzyedFile from './components/AnalzyedFile.vue'
+
 const API_URL = 'http://localhost:4000/fileinfo'
 
 export default {
 	name: 'App',
 	data() {
 		return {
-			fileinfo: {},
+			fileInfo: {},
+			error: '',
 		}
 	},
 	components: {
-		HelloWorld,
+		AnalzyedFile,
+		// AnalyzedFile,
 	},
 	mounted() {
-		fetch(API_URL)
-			.then((response) => response.json())
-			.then((result) => {
-				this.fileinfo = result
-			})
+		//reset the data before requesting the fileinfo
+		this.fileInfo = {}
+		this.error = ''
+
+		axios.get(API_URL).then((response) => {
+			if (response.status == 200 && response.data) {
+				this.fileInfo = response.data
+			} else {
+				this.error = response.data
+			}
+		})
 	},
 }
 </script>
