@@ -1,7 +1,11 @@
 <template>
-	<div id="app">
-		<div v-if="fileInfo && fileInfo.source">
-			<span>Results for file at URI: {{ fileInfo.source.uri }}</span>
+	<div
+		id="app"
+		class="flex flex-col items-center max-w-1200px w-full m-auto p-10"
+	>
+		<h1 class="text-2xl">Audio File Analyzer</h1>
+		<div v-if="fileInfo && fileInfo.source" class="flex flex-col items-center">
+			<span class="text-md">Results of file(s) analysis</span>
 			<analzyed-file :fileInfo="fileInfo" />
 		</div>
 	</div>
@@ -31,6 +35,7 @@ export default {
 		this.fileInfo = {}
 		this.error = ''
 
+		//could be improved to pull several files from a server and list them out
 		axios.get(API_URL).then((response) => {
 			if (response.status == 200 && response.data) {
 				this.fileInfo = response.data
@@ -42,13 +47,4 @@ export default {
 }
 </script>
 
-<style>
-#app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
-}
-</style>
+<style></style>
